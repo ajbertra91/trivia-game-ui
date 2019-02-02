@@ -2474,7 +2474,7 @@
     }
   }
 
-  var css = "trivia-game {\n    font-family: 'Montserrat', sans-serif;\n    font-weight: 200;\n    color: #333;\n    height: 100%;\n    display: block;\n    position: absolute;\n    top: 0;\n    bottom: 0;\n    right: 0;\n    left: 0;\n    padding-left: 10px;\n    padding-right: 10px;\n}\ntrivia-game .trivia-game__title {\n    text-transform: capitalize;\n    font-size: 32px;\n    font-weight: 200;\n    color: rgb(36, 178, 213);\n}\n\n.trivia-game__question-container {\n    display: block;\n    position: absolute;\n    bottom: 0;\n    right: 0;\n    left: 0;\n    padding: 0 10px;\n}\n\ntrivia-game p {\n    font-size: 22px;\n    font-family: inherit;\n    font-weight: 700;\n    padding: 20px;\n    margin-bottom: 300px;\n    text-align: center;\n}\n\ntrivia-game p.is-correct {\n    color: green;\n}\ntrivia-game p.is-incorrect {\n    color: red;\n}\n\ntrivia-game .next-question-button {\n    padding: 18px;\n    width: 100%;\n    background-color: rgb(36, 178, 213);\n    font-size: 18px;\n    font-family: inherit;\n    font-weight: 400;\n    color: white;\n}";
+  var css = "trivia-game {\n    font-family: 'Montserrat', sans-serif;\n    font-weight: 200;\n    color: #333;\n    height: 100%;\n    display: block;\n    position: absolute;\n    top: 0;\n    bottom: 0;\n    right: 0;\n    left: 0;\n    padding-left: 10px;\n    padding-right: 10px;\n}\ntrivia-game .trivia-game__title {\n    text-transform: capitalize;\n    font-size: 32px;\n    font-weight: 200;\n    color: rgb(36, 178, 213);\n}\n\n.trivia-game__question-container {\n    display: block;\n    position: absolute;\n    bottom: 0;\n    right: 0;\n    left: 0;\n    padding: 0 10px;\n}\n\ntrivia-game .answer-message {\n    margin-bottom: 300px;\n}\n\ntrivia-game .answer-message p {\n    font-size: 22px;\n    font-family: inherit;\n    font-weight: 700;\n    padding: 20px;\n    text-align: center;\n}\n\ntrivia-game p.is-correct {\n    color: green;\n}\ntrivia-game p.is-incorrect {\n    color: red;\n}\n\ntrivia-game .next-question-button {\n    padding: 18px;\n    width: 100%;\n    background-color: rgb(36, 178, 213);\n    font-size: 18px;\n    font-family: inherit;\n    font-weight: 400;\n    color: white;\n    border: 0;\n}\n\n@media screen and (min-width: 768px) {\n    trivia-game {\n        max-width: 50%;\n    }\n    trivia-game .trivia-game__question-container {\n        position: relative;\n    }\n}";
   styleInject(css);
 
   var css$1 = "trivia-question {\n    font-family: inherit;\n    color: currentColor;\n    font-size: 18px;\n}\n\ntrivia-question ul,\ntrivia-question li {\n    list-style-type: none;\n    margin: 0;\n    padding: 0;\n}\n\ntrivia-question button {\n    font-family: inherit;\n    font-size: 18px;\n    font-weight: 400;\n    color: white;\n    padding: 20px;\n    background-color: rgb(36, 178, 213);\n    width: 100%;\n    margin-bottom: 30px;\n    border: 0;\n}";
@@ -12326,20 +12326,10 @@
 
   // import * as es6Promise from 'es6-promise';
 
-  // export function getQuestions() {
-  //     return fetch('http://localhost:4000/graphql', {
-  //         method: 'POST',
-  //         mode: 'cors',
-  //         cache: 'no-cache',
-  //         credentials: 'include',
-  //         headers: {
-  //             'Content-Type': 'application/json'
-  //         },
-  //         body: JSON.stringify('{query: { questions { category question choices answer answered } }, variables: {} }'),
-  //     })
-  //     .then(res => res.json())
-  //     .then(res => res.data);
-  // }
+  /*
+   * curl -X POST -H "Content-Type: application/json" --data '{ "query": "{ questions {category} }" }' http://localhost:4000
+   */
+
   function getQuestions() {
       const MY_QUERY = src`
         query {
@@ -12361,7 +12351,6 @@
       return client.query({
           query: MY_QUERY,
           context: {
-              // example of setting the headers with context per operation
               headers: {
                 special: "Special header value"
               }
@@ -12446,9 +12435,18 @@
                 ${!this.state.status.isAnswered
                     ? ''
                     : this.state.status.isCorrect
-                        ? wire()`<p class="is-correct">CORRECT</p>`
-                        : wire()`<p class="is-incorrect">INCORRECT</p>`
-                    }
+                        ? wire()`
+                            <div class="answer-message">
+                                <p class="is-correct">CORRECT</p>
+                            </div>
+                        `
+                        : wire()`
+                            <div class="answer-message">
+                                <p class="is-incorrect">INCORRECT</p>
+                                <p class="correct-answer">${this.state.question.choices[this.state.question.answer]}</p>
+                            </div>
+                        `
+                }
                 ${!this.state.status.isAnswered
                     ? wire()`<trivia-question class="trivia-question" data=${ state } />`
                     : wire()`<button class="next-question-button" type="button">Next Question<button>`

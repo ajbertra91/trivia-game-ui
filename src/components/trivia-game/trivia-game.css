@@ -28,12 +28,15 @@ trivia-game .trivia-game__title {
     padding: 0 10px;
 }
 
-trivia-game p {
+trivia-game .answer-message {
+    margin-bottom: 300px;
+}
+
+trivia-game .answer-message p {
     font-size: 22px;
     font-family: inherit;
     font-weight: 700;
     padding: 20px;
-    margin-bottom: 300px;
     text-align: center;
 }
 
@@ -52,4 +55,14 @@ trivia-game .next-question-button {
     font-family: inherit;
     font-weight: 400;
     color: white;
+    border: 0;
+}
+
+@media screen and (min-width: 768px) {
+    trivia-game {
+        max-width: 50%;
+    }
+    trivia-game .trivia-game__question-container {
+        position: relative;
+    }
 }

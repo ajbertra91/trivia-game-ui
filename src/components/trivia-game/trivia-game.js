@@ -80,9 +80,18 @@ class TriviaGame extends HTMLElement {
                 ${!this.state.status.isAnswered
                     ? ''
                     : this.state.status.isCorrect
-                        ? wire()`<p class="is-correct">CORRECT</p>`
-                        : wire()`<p class="is-incorrect">INCORRECT</p>`
-                    }
+                        ? wire()`
+                            <div class="answer-message">
+                                <p class="is-correct">CORRECT</p>
+                            </div>
+                        `
+                        : wire()`
+                            <div class="answer-message">
+                                <p class="is-incorrect">INCORRECT</p>
+                                <p class="correct-answer">${this.state.question.choices[this.state.question.answer]}</p>
+                            </div>
+                        `
+                }
                 ${!this.state.status.isAnswered
                     ? wire()`<trivia-question class="trivia-question" data=${ state } />`
                     : wire()`<button class="next-question-button" type="button">Next Question<button>`

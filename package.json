@@ -1,5 +1,7 @@
 {
-  "name": "rollup-starter-app",
+  "name": "trivia-game",
+  "repository": "https://github.com/ajbertra91/trivia-game-ui.git",
+  "license": "MIT",
   "devDependencies": {
     "apollo-cache-inmemory": "^1.4.2",
     "apollo-client": "^2.4.12",

@@ -14,9 +14,12 @@ class TriviaGame extends HTMLElement {
         getQuestions()
             .then(response => {
                 this.questions = response.data.questions;
+                this.score = 0;
                 this.state = {
+                    status: 'incomplete',
                     question: this.getQuestion(this.type),
-                    status: {isAnswered: false, isCorrect: false}
+                    status: {isAnswered: false, isCorrect: false},
+                    score: this.score
                 }
                 this.render(this.html, this.state);
                 this.addEventListeners();
@@ -47,35 +50,44 @@ class TriviaGame extends HTMLElement {
             if (e.detail) {
                 this.state.status.isAnswered = true;
                 this.state.status.isCorrect = e.detail.answerIsCorrect;
+                this.score += e.detail.answerIsCorrect ? 100 : 0;
+                this.state.score = this.score;
             }
             this.render(this.html, this.state);
         })
         this.delegateEl.on('click', '.next-question-button', () => {
-            this.state = {
-                question: this.getQuestion(this.type),
-                status: {isAnswered: false, isCorrect: false}
-            };
+            if (this.questions.length > 0) {
+                this.state = {
+                    status: 'incomplete',
+                    question: this.getQuestion(this.type),
+                    status: {isAnswered: false, isCorrect: false},
+                    score: this.score
+                };
+            } else {
+                this.state = {
+                    status: 'complete',
+                    question: this.getQuestion(this.type),
+                    status: {isAnswered: false, isCorrect: false},
+                    score: this.score
+                };
+            }
             this.render(this.html, this.state);
         })
     }
 
-    getRandomQuestion(array) {
-        const max =  array.length;
+    getQuestion() {
+        const max =  this.questions.length;
         const randomInt = Math.floor(Math.random() * Math.floor(max));
-        this.isAnswered = false;
-        this.isCorrect = false;
-        return array[randomInt];
-    }
-
-    getQuestion(category) {
-        const questionsByCategory = this.questions.filter(q => q.category === category);
-        return this.getRandomQuestion(questionsByCategory);
+        const question = this.questions[randomInt]
+        this.questions.splice(randomInt,1);
+        return question;
     }
 
     render(html, state) {
         if (!this.connected) { return '';}
         return html`
             <h1 class="trivia-game__title">${ this.type } Trivia</h1>
+            <p class="trivia-game__score">Score: ${ this.state.score }</p>
             <div class="trivia-game__question-container">
                 ${!this.state.status.isAnswered
                     ? ''

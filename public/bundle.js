@@ -2474,7 +2474,7 @@
     }
   }
 
-  var css = "trivia-game {\n    font-family: 'Montserrat', sans-serif;\n    font-weight: 200;\n    color: #333;\n    height: 100%;\n    display: block;\n    position: absolute;\n    top: 0;\n    bottom: 0;\n    right: 0;\n    left: 0;\n    padding-left: 10px;\n    padding-right: 10px;\n}\ntrivia-game .trivia-game__title {\n    text-transform: capitalize;\n    font-size: 32px;\n    font-weight: 200;\n    color: rgb(36, 178, 213);\n}\n\n.trivia-game__question-container {\n    display: block;\n    position: absolute;\n    bottom: 0;\n    right: 0;\n    left: 0;\n    padding: 0 10px;\n}\n\ntrivia-game .answer-message {\n    margin-bottom: 300px;\n}\n\ntrivia-game .answer-message p {\n    font-size: 22px;\n    font-family: inherit;\n    font-weight: 700;\n    padding: 20px;\n    text-align: center;\n}\n\ntrivia-game p.is-correct {\n    color: green;\n}\ntrivia-game p.is-incorrect {\n    color: red;\n}\n\ntrivia-game .next-question-button {\n    padding: 18px;\n    width: 100%;\n    background-color: rgb(36, 178, 213);\n    font-size: 18px;\n    font-family: inherit;\n    font-weight: 400;\n    color: white;\n    border: 0;\n}\n\n@media screen and (min-width: 768px) {\n    trivia-game {\n        max-width: 50%;\n    }\n    trivia-game .trivia-game__question-container {\n        position: relative;\n    }\n}";
+  var css = "trivia-game {\n    font-family: 'Montserrat', sans-serif;\n    font-weight: 200;\n    color: #333;\n    height: 100%;\n    display: block;\n    position: absolute;\n    top: 0;\n    bottom: 0;\n    right: 0;\n    left: 0;\n    padding-left: 10px;\n    padding-right: 10px;\n}\ntrivia-game .trivia-game__title {\n    text-transform: capitalize;\n    font-size: 32px;\n    font-weight: 200;\n    color: rgb(36, 178, 213);\n}\ntrivia-game .trivia-game__score {\n    text-transform: capitalize;\n    font-size: 32px;\n    font-weight: 200;\n    color: rgb(36, 178, 213);\n}\n\n.trivia-game__question-container {\n    display: block;\n    position: absolute;\n    bottom: 0;\n    right: 0;\n    left: 0;\n    padding: 0 10px;\n}\n\ntrivia-game .answer-message {\n    margin-bottom: 300px;\n}\n\ntrivia-game .answer-message p {\n    font-size: 22px;\n    font-family: inherit;\n    font-weight: 700;\n    padding: 20px;\n    text-align: center;\n}\n\ntrivia-game p.is-correct {\n    color: green;\n}\ntrivia-game p.is-incorrect {\n    color: red;\n}\n\ntrivia-game .next-question-button {\n    padding: 18px;\n    width: 100%;\n    background-color: rgb(36, 178, 213);\n    font-size: 18px;\n    font-family: inherit;\n    font-weight: 400;\n    color: white;\n    border: 0;\n}\n\n@media screen and (min-width: 768px) {\n    trivia-game {\n        max-width: 50%;\n    }\n    trivia-game .trivia-game__question-container {\n        position: relative;\n    }\n}";
   styleInject(css);
 
   var css$1 = "trivia-question {\n    font-family: inherit;\n    color: currentColor;\n    font-size: 18px;\n}\n\ntrivia-question ul,\ntrivia-question li {\n    list-style-type: none;\n    margin: 0;\n    padding: 0;\n}\n\ntrivia-question button {\n    font-family: inherit;\n    font-size: 18px;\n    font-weight: 400;\n    color: white;\n    padding: 20px;\n    background-color: rgb(36, 178, 213);\n    width: 100%;\n    margin-bottom: 30px;\n    border: 0;\n}";
@@ -12369,9 +12369,12 @@
           getQuestions()
               .then(response => {
                   this.questions = response.data.questions;
+                  this.score = 0;
                   this.state = {
+                      status: 'incomplete',
                       question: this.getQuestion(this.type),
-                      status: {isAnswered: false, isCorrect: false}
+                      status: {isAnswered: false, isCorrect: false},
+                      score: this.score
                   };
                   this.render(this.html, this.state);
                   this.addEventListeners();
@@ -12402,35 +12405,44 @@
               if (e.detail) {
                   this.state.status.isAnswered = true;
                   this.state.status.isCorrect = e.detail.answerIsCorrect;
+                  this.score += e.detail.answerIsCorrect ? 100 : 0;
+                  this.state.score = this.score;
               }
               this.render(this.html, this.state);
           });
           this.delegateEl.on('click', '.next-question-button', () => {
-              this.state = {
-                  question: this.getQuestion(this.type),
-                  status: {isAnswered: false, isCorrect: false}
-              };
+              if (this.questions.length > 0) {
+                  this.state = {
+                      status: 'incomplete',
+                      question: this.getQuestion(this.type),
+                      status: {isAnswered: false, isCorrect: false},
+                      score: this.score
+                  };
+              } else {
+                  this.state = {
+                      status: 'complete',
+                      question: this.getQuestion(this.type),
+                      status: {isAnswered: false, isCorrect: false},
+                      score: this.score
+                  };
+              }
               this.render(this.html, this.state);
           });
       }
 
-      getRandomQuestion(array) {
-          const max =  array.length;
+      getQuestion() {
+          const max =  this.questions.length;
           const randomInt = Math.floor(Math.random() * Math.floor(max));
-          this.isAnswered = false;
-          this.isCorrect = false;
-          return array[randomInt];
-      }
-
-      getQuestion(category) {
-          const questionsByCategory = this.questions.filter(q => q.category === category);
-          return this.getRandomQuestion(questionsByCategory);
+          const question = this.questions[randomInt];
+          this.questions.splice(randomInt,1);
+          return question;
       }
 
       render(html, state) {
           if (!this.connected) { return '';}
           return html`
             <h1 class="trivia-game__title">${ this.type } Trivia</h1>
+            <p class="trivia-game__score">Score: ${ this.state.score }</p>
             <div class="trivia-game__question-container">
                 ${!this.state.status.isAnswered
                     ? ''

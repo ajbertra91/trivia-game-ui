@@ -18,6 +18,12 @@ trivia-game .trivia-game__title {
     font-weight: 200;
     color: rgb(36, 178, 213);
 }
+trivia-game .trivia-game__score {
+    text-transform: capitalize;
+    font-size: 32px;
+    font-weight: 200;
+    color: rgb(36, 178, 213);
+}
 
 .trivia-game__question-container {
     display: block;

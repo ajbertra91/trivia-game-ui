@@ -1,0 +1,55 @@
+trivia-game {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 200;
+    color: #333;
+    height: 100%;
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+trivia-game .trivia-game__title {
+    text-transform: capitalize;
+    font-size: 32px;
+    font-weight: 200;
+    color: rgb(36, 178, 213);
+}
+
+.trivia-game__question-container {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    padding: 0 10px;
+}
+
+trivia-game p {
+    font-size: 22px;
+    font-family: inherit;
+    font-weight: 700;
+    padding: 20px;
+    margin-bottom: 300px;
+    text-align: center;
+}
+
+trivia-game p.is-correct {
+    color: green;
+}
+trivia-game p.is-incorrect {
+    color: red;
+}
+
+trivia-game .next-question-button {
+    padding: 18px;
+    width: 100%;
+    background-color: rgb(36, 178, 213);
+    font-size: 18px;
+    font-family: inherit;
+    font-weight: 400;
+    color: white;
+}

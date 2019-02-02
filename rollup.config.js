@@ -1,6 +1,7 @@
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
-import { uglify } from 'rollup-plugin-uglify';
+// import { uglify } from 'rollup-plugin-uglify';
+import {terser} from 'rollup-plugin-terser';
 import postcss from 'rollup-plugin-postcss';
 
 // `npm run build` -> `production` is true
@@ -20,6 +21,6 @@ export default {
         }),
         resolve(), // tells Rollup how to find imported modules
         commonjs(), // converts modules to ES modules
-        production && uglify() // minify, but only in production
+        production && terser() // minify, but only in production
     ]
 };

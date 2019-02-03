@@ -16,9 +16,9 @@ trivia-question button {
     font-size: 18px;
     font-weight: 400;
     color: white;
-    padding: 20px;
+    padding: 11px;
     background-color: rgb(36, 178, 213);
     width: 100%;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     border: 0;
 }

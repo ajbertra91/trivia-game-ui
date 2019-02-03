@@ -27,15 +27,6 @@ trivia-game .trivia-game__score {
 
 .trivia-game__question-container {
     display: block;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    padding: 0 10px;
-}
-
-trivia-game .answer-message {
-    margin-bottom: 300px;
 }
 
 trivia-game .answer-message p {

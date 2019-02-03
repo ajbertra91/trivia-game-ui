@@ -1,6 +1,3 @@
-// import * as es6Promise from 'es6-promise';
-// es6Promise.polyfill();
-// import 'isomorphic-fetch';
 import { ApolloLink } from 'apollo-link';
 import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
@@ -24,8 +21,15 @@ export function getQuestions() {
         }
     `;
 
+    const hostname = window.location.hostname;
+    let uri = '';
+    if (hostname === 'localhost') {
+        uri = 'http://localhost:4000'
+    } else {
+        uri = 'https://ajb-trivia-game-services.herokuapp.com'
+    }
     const client = new ApolloClient({
-      link: new HttpLink({ uri: 'http://localhost:4000/graphql' }),
+      link: new HttpLink({ uri: `${uri}/graphql` }),
       cache: new InMemoryCache()
     });
 

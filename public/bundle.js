@@ -3187,9 +3187,6 @@
 
   /* tslint:disable */
   var Observable$1 = zenObservable;
-  //# sourceMappingURL=zenObservable.js.map
-
-  //# sourceMappingURL=index.js.map
 
   /**
    * Copyright (c) 2018-present, Facebook, Inc.
@@ -3856,7 +3853,6 @@
           typeof jsonObject === 'object' &&
           jsonObject.type === 'json');
   }
-  //# sourceMappingURL=storeUtils.js.map
 
   function getDirectiveInfoFromField(field, variables) {
       if (field.directives && field.directives.length) {
@@ -3924,7 +3920,6 @@
   function hasDirectives(names, doc) {
       return getDirectiveNames(doc).some(function (name) { return names.indexOf(name) > -1; });
   }
-  //# sourceMappingURL=directives.js.map
 
   function getFragmentQueryDocument(document, fragmentName) {
       var actualFragmentName = fragmentName;
@@ -3964,7 +3959,6 @@
           ].concat(document.definitions) });
       return query;
   }
-  //# sourceMappingURL=fragments.js.map
 
   function assign(target) {
       var sources = [];
@@ -3981,7 +3975,6 @@
       });
       return target;
   }
-  //# sourceMappingURL=assign.js.map
 
   function getMutationDefinition(doc) {
       checkDocument(doc);
@@ -4088,7 +4081,6 @@
       }
       return {};
   }
-  //# sourceMappingURL=getFromAST.js.map
 
   function filterInPlace(array, test, context) {
       var target = 0;
@@ -4100,7 +4092,6 @@
       array.length = target;
       return array;
   }
-  //# sourceMappingURL=filterInPlace.js.map
 
   var TYPENAME_FIELD = {
       kind: 'Field',
@@ -4298,7 +4289,6 @@
       });
       return allFragments;
   }
-  //# sourceMappingURL=transform.js.map
 
   var toString = Object.prototype.toString;
   function cloneDeep(value) {
@@ -4330,7 +4320,6 @@
               return val;
       }
   }
-  //# sourceMappingURL=cloneDeep.js.map
 
   function getEnv() {
       if (typeof process !== 'undefined' && process.env.NODE_ENV) {
@@ -4347,7 +4336,6 @@
   function isTest() {
       return isEnv('test') === true;
   }
-  //# sourceMappingURL=environment.js.map
 
   function tryFunctionOrLogError(f) {
       try {
@@ -4362,7 +4350,6 @@
   function graphQLResultHasError(result) {
       return result.errors && result.errors.length;
   }
-  //# sourceMappingURL=errorHandling.js.map
 
   function isEqual(a, b) {
       if (a === b) {
@@ -4395,9 +4382,6 @@
       }
       return false;
   }
-  //# sourceMappingURL=isEqual.js.map
-
-  //# sourceMappingURL=maybeDeepFreeze.js.map
 
   var haveWarned = Object.create({});
   function warnOnceInDevelopment(msg, type) {
@@ -4418,11 +4402,6 @@
           }
       }
   }
-  //# sourceMappingURL=warnOnce.js.map
-
-  //# sourceMappingURL=stripSymbols.js.map
-
-  //# sourceMappingURL=index.js.map
 
   /**
    * Copyright (c) 2015-present, Facebook, Inc.
@@ -4843,7 +4822,6 @@
       // that might not always be true
       return print(operation.query) + "|" + JSON.stringify(operation.variables) + "|" + operation.operationName;
   }
-  //# sourceMappingURL=linkUtils.js.map
 
   var passthrough = function (op, forward) { return (forward ? forward(op) : Observable$1.of()); };
   var toLink = function (handler) {
@@ -4921,9 +4899,6 @@
   function execute(link, operation) {
       return (link.request(createOperation(operation.context, transformOperation(validateOperation(operation)))) || Observable$1.of());
   }
-  //# sourceMappingURL=link.js.map
-
-  //# sourceMappingURL=index.js.map
 
   var NetworkStatus;
   (function (NetworkStatus) {
@@ -4938,7 +4913,6 @@
   function isNetworkRequestInFlight(networkStatus) {
       return networkStatus < 7;
   }
-  //# sourceMappingURL=networkStatus.js.map
 
   function symbolObservablePonyfill(root) {
   	var result;
@@ -4989,7 +4963,6 @@
       };
       return Observable$$1;
   }(Observable$1));
-  //# sourceMappingURL=Observable.js.map
 
   function isApolloError(err) {
       return err.hasOwnProperty('graphQLErrors');
@@ -5029,7 +5002,6 @@
       }
       return ApolloError;
   }(Error));
-  //# sourceMappingURL=ApolloError.js.map
 
   var FetchType;
   (function (FetchType) {
@@ -5037,7 +5009,6 @@
       FetchType[FetchType["refetch"] = 2] = "refetch";
       FetchType[FetchType["poll"] = 3] = "poll";
   })(FetchType || (FetchType = {}));
-  //# sourceMappingURL=types.js.map
 
   var hasError = function (storeValue, policy) {
       if (policy === void 0) { policy = 'none'; }
@@ -5370,7 +5341,6 @@
       };
       return ObservableQuery;
   }(Observable$2));
-  //# sourceMappingURL=ObservableQuery.js.map
 
   var __extends$2 = (undefined && undefined.__extends) || (function () {
       var extendStatics = function (d, b) {
@@ -5455,9 +5425,6 @@
       };
       return DedupLink;
   }(ApolloLink));
-  //# sourceMappingURL=dedupLink.js.map
-
-  //# sourceMappingURL=index.js.map
 
   var QueryScheduler = (function () {
       function QueryScheduler(_a) {
@@ -5563,7 +5530,6 @@
       };
       return QueryScheduler;
   }());
-  //# sourceMappingURL=scheduler.js.map
 
   var MutationStore = (function () {
       function MutationStore() {
@@ -5604,7 +5570,6 @@
       };
       return MutationStore;
   }());
-  //# sourceMappingURL=mutations.js.map
 
   var QueryStore = (function () {
       function QueryStore() {
@@ -5712,7 +5677,6 @@
       };
       return QueryStore;
   }());
-  //# sourceMappingURL=queries.js.map
 
   var QueryManager = (function () {
       function QueryManager(_a) {
@@ -6511,7 +6475,6 @@
       };
       return QueryManager;
   }());
-  //# sourceMappingURL=QueryManager.js.map
 
   var DataStore = (function () {
       function DataStore(initialCache) {
@@ -6648,7 +6611,6 @@
       };
       return DataStore;
   }());
-  //# sourceMappingURL=store.js.map
 
   var version_1 = "2.4.12";
 
@@ -6875,9 +6837,6 @@
       };
       return ApolloClient;
   }());
-  //# sourceMappingURL=ApolloClient.js.map
-
-  //# sourceMappingURL=index.js.map
 
   var testMap = new Map();
   if (testMap.set(1, 2) !== testMap) {
@@ -6925,7 +6884,6 @@
       Object.seal = wrap$1(Object.seal);
       Object.preventExtensions = wrap$1(Object.preventExtensions);
   }
-  //# sourceMappingURL=fixPolyfills.js.map
 
   function queryFromPojo(obj) {
       var op = {
@@ -7023,7 +6981,6 @@
           },
       ],
   };
-  //# sourceMappingURL=utils.js.map
 
   var ApolloCache = (function () {
       function ApolloCache() {
@@ -7094,13 +7051,6 @@
       };
       return ApolloCache;
   }());
-  //# sourceMappingURL=cache.js.map
-
-  //# sourceMappingURL=Cache.js.map
-
-  //# sourceMappingURL=index.js.map
-
-  //# sourceMappingURL=index.js.map
 
   function Cache$1(options) {
     this.map = new Map;
@@ -8049,7 +7999,6 @@
       };
       return HeuristicFragmentMatcher;
   }());
-  //# sourceMappingURL=fragmentMatcher.js.map
 
   var CacheKeyNode = (function () {
       function CacheKeyNode() {
@@ -8080,7 +8029,6 @@
       };
       return CacheKeyNode;
   }());
-  //# sourceMappingURL=cacheKeys.js.map
 
   var hasOwn = Object.prototype.hasOwnProperty;
   var DepTrackingCache = (function () {
@@ -8141,7 +8089,6 @@
   function defaultNormalizedCacheFactory(seed) {
       return new DepTrackingCache(seed);
   }
-  //# sourceMappingURL=depTrackingCache.js.map
 
   var StoreReader = (function () {
       function StoreReader(cacheKeyRoot) {
@@ -8466,7 +8413,6 @@
       }
       return value;
   }
-  //# sourceMappingURL=readFromStore.js.map
 
   var ObjectCache = (function () {
       function ObjectCache(data) {
@@ -8493,7 +8439,6 @@
       };
       return ObjectCache;
   }());
-  //# sourceMappingURL=objectCache.js.map
 
   var WriteError = (function (_super) {
       __extends(WriteError, _super);
@@ -8771,7 +8716,6 @@
       }
       return false;
   }
-  //# sourceMappingURL=writeToStore.js.map
 
   var defaultConfig = {
       fragmentMatcher: new HeuristicFragmentMatcher(),
@@ -8984,9 +8928,6 @@
       };
       return InMemoryCache;
   }(ApolloCache));
-  //# sourceMappingURL=inMemoryCache.js.map
-
-  //# sourceMappingURL=index.js.map
 
   var __assign$2 = (undefined && undefined.__assign) || function () {
       __assign$2 = Object.assign || function(t) {
@@ -9131,7 +9072,6 @@
           return fallbackURI || '/graphql';
       }
   };
-  //# sourceMappingURL=index.js.map
 
   /* tslint:disable */
   var __extends$3 = (undefined && undefined.__extends) || (function () {
@@ -9365,9 +9305,6 @@
       }
       return HttpLink;
   }(ApolloLink));
-  //# sourceMappingURL=httpLink.js.map
-
-  //# sourceMappingURL=index.js.map
 
   /**
    * Copyright (c) 2015-present, Facebook, Inc.

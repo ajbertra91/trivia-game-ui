@@ -106,7 +106,7 @@ class TriviaGame extends HTMLElement {
                 }
                 ${!this.state.status.isAnswered
                     ? wire()`<trivia-question class="trivia-question" data=${ state } />`
-                    : wire()`<button class="next-question-button" type="button">Next Question<button>`
+                    : wire()`<button class="next-question-button" type="button">Next Question</button>`
                 }
             </div>
         `;

@@ -1,3 +1,14 @@
+# Trivia Game UI
+
+![built with graphQL](https://img.shields.io/badge/built_with-hyperhtml-blue.svg)
+
+![built with graphQL](https://img.shields.io/badge/built_with-graphQL-blue.svg)
+
+A simple trivia game build with hyperhtml and graphQL.
+
+## Demo
+[Trivia Game](https://ajbertra91.github.io/trivia-game/)
+
 ## Getting started
 
 ```bash
